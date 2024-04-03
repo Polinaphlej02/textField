@@ -10,6 +10,13 @@ class TextForm extends StatefulWidget {
 class _TextFormState extends State<TextForm> {
 
   final _formKey = GlobalKey<FormState>();
+  final _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +33,12 @@ class _TextFormState extends State<TextForm> {
           children: [
             TextFormField(decoration: InputDecoration(
               labelText: "Your text",
-              suffixIcon: Icon(Icons.delete_forever)
+              suffixIcon: IconButton( onPressed: _clearText, icon: Icon(Icons.delete_outline),)
               ), 
+              controller: _textController,
               validator: (value)=> value!.isEmpty ? "Enter your text" : null),
             ElevatedButton(
-              onPressed: (){}, 
+              onPressed: _display, 
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.black)
               ),
@@ -38,5 +46,15 @@ class _TextFormState extends State<TextForm> {
           ],
       ),)
           );
+  }
+
+  void _display() {
+    if (_formKey.currentState!.validate()) {
+      print("test");
+    }
+  }
+
+  void _clearText() {
+    _textController.clear();
   }
   }
