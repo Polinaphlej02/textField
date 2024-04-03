@@ -44,7 +44,7 @@ class _TextFormState extends State<TextForm> {
               Text(textResult, style: TextStyle(fontSize: 20),)
           ],
       ),)
-          );
+    );
   }
 
   void _display() {
