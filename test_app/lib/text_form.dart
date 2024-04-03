@@ -11,6 +11,7 @@ class _TextFormState extends State<TextForm> {
 
   final _formKey = GlobalKey<FormState>();
   final _textController = TextEditingController();
+  String textResult = "";
 
   @override
   void dispose() {
@@ -23,26 +24,29 @@ class _TextFormState extends State<TextForm> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("TextField", style: TextStyle(color: Colors.white),),
+        title: const Text("Test", style: TextStyle(color: Colors.white),),
         centerTitle: true,
       ),
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           children: [
             TextFormField(decoration: InputDecoration(
               labelText: "Your text",
-              suffixIcon: IconButton( onPressed: _clearText, icon: Icon(Icons.delete_outline),)
+              suffixIcon: IconButton( onPressed: _clearText, icon: Icon(Icons.delete_sharp),)
               ), 
               controller: _textController,
               validator: (value)=> value!.isEmpty ? "Enter your text" : null),
+              const SizedBox(height: 30,),
             ElevatedButton(
               onPressed: _display, 
-              style: ButtonStyle(
+              style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Colors.black)
               ),
-              child: Text("Display text", style: TextStyle(color: Colors.white),),)
+              child: const Text("Display text", style: TextStyle(color: Colors.white),),),
+              const SizedBox(height: 30,),
+              Text(textResult, style: TextStyle(fontSize: 20),)
           ],
       ),)
           );
@@ -50,7 +54,8 @@ class _TextFormState extends State<TextForm> {
 
   void _display() {
     if (_formKey.currentState!.validate()) {
-      print("test");
+      textResult = _textController.text;
+      setState(() {});
     }
   }
 
