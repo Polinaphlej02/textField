@@ -13,11 +13,6 @@ class _TextFormState extends State<TextForm> {
   final _textController = TextEditingController();
   String textResult = "";
 
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
